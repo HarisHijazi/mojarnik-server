@@ -1,6 +1,6 @@
 import django_heroku
 from pathlib import Path
-
+import dj_database_url
 # GENERAL
 # ------------------------------------------------------------------------------
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -110,7 +110,7 @@ TEMPLATES = [
 # }
 
 
-import dj_database_url
+
 
 DATABASES = {
     'default': {
