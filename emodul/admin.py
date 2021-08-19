@@ -11,7 +11,7 @@ class EModulAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
 
-        user_qs = penulis.objects.filter(penulis=request.user)
+        user_qs = penulis.objects.filter(user=request.user)
         return qs.filter(managers__in=user_qs)
 
 
