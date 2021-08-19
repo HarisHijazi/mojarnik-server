@@ -49,6 +49,7 @@ class EModulAnnotation(models.Model):
     halaman = models.PositiveSmallIntegerField(_("Halaman"))
     text = models.TextField(_("Text anotasi"))
 
+
     class Meta:
         verbose_name = 'eModul annotation'
         verbose_name_plural = 'eModul annotation'
