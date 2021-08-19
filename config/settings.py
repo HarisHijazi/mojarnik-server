@@ -288,4 +288,5 @@ SEMESTER = (
     (S7, '7'),
     (S8, '8'),
 )
+
 django_heroku.settings(locals())
