@@ -1,6 +1,7 @@
 import django_heroku
+import os
 from pathlib import Path
-import dj_database_url
+
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -112,7 +113,7 @@ TEMPLATES = [
 # }
 
 
-
+import dj_database_url
 
 DATABASES = {
     'default': {
@@ -289,4 +290,7 @@ SEMESTER = (
     (S7, '7'),
     (S8, '8'),
 )
+
+
+
 django_heroku.settings(locals())
