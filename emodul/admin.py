@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import EModul, EModulComment, EModulDetail, EModulBookmark, EModulAnnotation
+from akademik.models import MataKuliah
 
 @admin.register(EModul)
 class EModulAdmin(admin.ModelAdmin):
@@ -11,8 +12,8 @@ class EModulAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
 
-        user_qs = penulis.objects.filter(user=request.user)
-        return qs.filter(managers__in=user_qs)
+        user_qs = pengajar.objects.filter(user=request.user)
+        return qs.filter(pengajar=user_qs)
 
 
 @admin.register(EModulDetail)
