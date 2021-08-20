@@ -46,6 +46,9 @@ class MataKuliah(models.Model):
         _("Semester"), choices=settings.SEMESTER, max_length=1)
     program_studi = models.ForeignKey("ProgramStudi", verbose_name=_("Program studi"), on_delete=models.CASCADE, null=True)
     # TODO: tambah pembatas nilai minimum dan maksimum untuk field sks dan jam
+    pengajar = models.ForeignKey(User, verbose_name=_(
+        "Pengajar"), on_delete=models.CASCADE, null=True, blank=True, related_name='pengajar_matakuliah')
+
     sks_teori = models.PositiveSmallIntegerField(
         _("Jumlah SKS teori"), null=True, blank=True)
     sks_praktik = models.PositiveSmallIntegerField(

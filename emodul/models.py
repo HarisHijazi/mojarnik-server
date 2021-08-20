@@ -14,8 +14,8 @@ class EModul(models.Model):
     judul = models.CharField(_("Judul modul"), max_length=50)
     jumlah_modul = models.SmallIntegerField(
         _("Jumlah Modul"), null=True, blank=True)
-    penulis = models.ForeignKey(User, verbose_name=_(
-        "Uploader"), on_delete=models.CASCADE, null=True, blank=True, related_name='emodul')
+    # penulis = models.ForeignKey(User, verbose_name=_(
+    #     "Uploader"), on_delete=models.CASCADE, null=True, blank=True, related_name='emodul')
     tanggal = models.DateField(verbose_name=_("Tanggal Upload"), auto_now=True)
 
     class Meta:
@@ -45,7 +45,7 @@ class EModulAnnotation(models.Model):
         "EModul Detail"), on_delete=models.CASCADE, related_name='annotations')
     user = models.ForeignKey(User, verbose_name=_(
         "Pengguna"), on_delete=models.CASCADE, related_name='annotations')
-    # koordinat = models.CharField(_("koordinat bentuk"), max_length=100 [])
+    koordinat = models.CharField(_("Koordinat"), max_length=20, null=True, blank=True)
     halaman = models.PositiveSmallIntegerField(_("Halaman"))
     text = models.TextField(_("Text anotasi"))
 

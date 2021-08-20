@@ -3,7 +3,7 @@ from .models import EModul, EModulComment, EModulDetail, EModulBookmark, EModulA
 
 @admin.register(EModul)
 class EModulAdmin(admin.ModelAdmin):
-    list_display = ['mata_kuliah', 'judul', 'jumlah_modul', 'penulis','tanggal']
+    list_display = ['mata_kuliah', 'judul', 'jumlah_modul','tanggal']
 
     def queryset(self, request):
         qs = super(admin.ModelAdmin, self).queryset(request)
