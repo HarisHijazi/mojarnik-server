@@ -1,6 +1,7 @@
 import django_heroku
 from pathlib import Path
 import dj_database_url
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -288,5 +289,4 @@ SEMESTER = (
     (S7, '7'),
     (S8, '8'),
 )
-
 django_heroku.settings(locals())
