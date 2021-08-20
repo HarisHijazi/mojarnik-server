@@ -1,4 +1,4 @@
-import django_heroku
+import django-heroku
 from pathlib import Path
 import dj_database_url
 
