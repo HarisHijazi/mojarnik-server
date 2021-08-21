@@ -31,7 +31,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (  # Tambah user baru
         (None, {
             # 'fields': ('username', 'email', 'role', 'password1', 'password2')}
-            'fields': ('username', 'first_name','last_name','role', 'gender', 'no_hp', 'password1', 'password2')}
+            'fields': ('username', 'first_name','last_name', 'foto', 'role', 'gender', 'no_hp', 'password1', 'password2')}
          ),
     )
     form = CustomUserChangeForm
