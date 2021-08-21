@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class EModul(models.Model):
-    
+
     mata_kuliah = models.ForeignKey("akademik.MataKuliah", verbose_name=_(
         'Mata kuliah'), on_delete=models.CASCADE, related_name='emodul')
     judul = models.CharField(_("Judul modul"), max_length=50)
@@ -25,13 +25,15 @@ class EModul(models.Model):
     def __str__(self):
         return self.judul
 
+
 class EModulDetail(models.Model):
     emodul = models.ForeignKey("EModul", verbose_name=_(
         "EModul"), on_delete=models.CASCADE, related_name='details')
     judul = models.CharField(_("Judul dokumen"), max_length=50)
     jumlah_halaman = models.SmallIntegerField(
         _("Jumlah halaman"), null=True, blank=True)
-    file = models.FileField(_("File"), upload_to=None, max_length=100)
+    file = models.FileField(
+        _("File"), upload_to="emodul_detail/%Y/%m/%d/", max_length=100)
 
     class Meta:
         verbose_name = 'eModul detail'
@@ -40,15 +42,16 @@ class EModulDetail(models.Model):
     def __str__(self):
         return self.judul
 
+
 class EModulAnnotation(models.Model):
     dokumen = models.ForeignKey("EModulDetail", verbose_name=_(
         "EModul Detail"), on_delete=models.CASCADE, related_name='annotations')
     user = models.ForeignKey(User, verbose_name=_(
         "Pengguna"), on_delete=models.CASCADE, related_name='annotations')
-    koordinat = models.CharField(_("Koordinat"), max_length=20, null=True, blank=True)
+    koordinat = models.CharField(
+        _("Koordinat"), max_length=20, null=True, blank=True)
     halaman = models.PositiveSmallIntegerField(_("Halaman"))
     text = models.TextField(_("Text anotasi"))
-
 
     class Meta:
         verbose_name = 'eModul annotation'
@@ -64,8 +67,8 @@ class EModulBookmark(models.Model):
     user = models.ForeignKey(User, verbose_name=_(
         "Pengguna"), on_delete=models.CASCADE, related_name='bookmarks')
     halaman = models.PositiveSmallIntegerField(_("Halaman"))
-    tanggal = models.DateField(verbose_name=_("Tanggal Bookmark"), auto_now=True)
-
+    tanggal = models.DateField(verbose_name=_(
+        "Tanggal Bookmark"), auto_now=True)
 
     class Meta:
         verbose_name = 'eModul bookmark'
