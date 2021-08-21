@@ -15,11 +15,11 @@ class EModulAdmin(admin.ModelAdmin):
             return qs                 # tampilkan semua emodul
 
         # Jika buka superuser, dapatkan objek user yang logged in (asumsinya adalah dosen)
-        logged_in_user = CustomUser.objects.filter(
-            username=request.user.username).get()
+        # logged_in_user = CustomUser.objects.filter(
+        #     username=request.user.username).get()
 
         # filter matakuliah yang diajar oleh user logged in
-        filter_matakuliah = MataKuliah.objects.filter(pengajar=logged_in_user)
+        filter_matakuliah = MataKuliah.objects.filter(pengajar=request.user)
 
         # filter semua emodul dari mata kuliah yang diajar oleh user logged in
         emodul_terfilter = EModul.objects.filter(
@@ -35,10 +35,10 @@ class EModulAdmin(admin.ModelAdmin):
 
             # filter jika user logged in bukan superuser
             if not request.user.is_superuser:
-                logged_in_user = CustomUser.objects.filter(
-                    username=request.user.username).get()
+                # logged_in_user = CustomUser.objects.filter(
+                #     username=request.user.username).get()
                 kwargs["queryset"] = MataKuliah.objects.filter(
-                    pengajar=logged_in_user)
+                    pengajar=request.user)
 
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
@@ -54,11 +54,11 @@ class EModulDetailAdmin(admin.ModelAdmin):
             return qs                 # tampilkan semua emodul
 
         # Jika buka superuser, dapatkan objek user yang logged in (asumsinya adalah dosen)
-        logged_in_user = CustomUser.objects.filter(
-            username=request.user.username).get()
+        # logged_in_user = CustomUser.objects.filter(
+            # username=request.user.username).get()
 
         # filter matakuliah yang diajar oleh user logged in
-        filter_matakuliah = MataKuliah.objects.filter(pengajar=logged_in_user)
+        filter_matakuliah = MataKuliah.objects.filter(pengajar=request.user)
 
         # filter emodul dari mata kuliah yang diajar oleh user logged in
         filter_emodul = EModul.objects.filter(
@@ -78,12 +78,12 @@ class EModulDetailAdmin(admin.ModelAdmin):
 
             # filter jika user logged in bukan superuser
             if not request.user.is_superuser:
-                logged_in_user = CustomUser.objects.filter(
-                    username=request.user.username).get()
+                # logged_in_user = CustomUser.objects.filter(
+                #     username=request.user.username).get()
 
                 # filter matakuliah yang diajar oleh user logged in
                 filter_matakuliah = MataKuliah.objects.filter(
-                    pengajar=logged_in_user)
+                    pengajar=request.user)
 
                 # filter emodul dari mata kuliah yang diajar oleh user logged in
                 kwargs["queryset"] = EModul.objects.filter(
