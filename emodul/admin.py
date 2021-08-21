@@ -22,7 +22,7 @@ class EModulDetailAdmin(admin.ModelAdmin):
 
 @admin.register(EModulAnnotation)
 class EModulAnnotationAdmin(admin.ModelAdmin):
-    list_display = ['dokumen', 'user', 'halaman', 'text']
+    list_display = ['dokumen', 'user', 'koordinat', 'halaman', 'text']
 
 @admin.register(EModulBookmark)
 class EModulBookmarkAdmin(admin.ModelAdmin):
