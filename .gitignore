@@ -13,3 +13,4 @@ media
 
 # Ignore virtual env directory
 venv
+.vscode
