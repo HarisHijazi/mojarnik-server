@@ -47,6 +47,50 @@ class EModulAdmin(admin.ModelAdmin):
 class EModulDetailAdmin(admin.ModelAdmin):
     list_display = ['emodul', 'judul', 'jumlah_halaman', 'file']
 
+    def get_queryset(self, request):
+        qs = super(admin.ModelAdmin, self).get_queryset(request)
+
+        if request.user.is_superuser:  # Jika user adalah superuser
+            return qs                 # tampilkan semua emodul
+
+        # Jika buka superuser, dapatkan objek user yang logged in (asumsinya adalah dosen)
+        logged_in_user = CustomUser.objects.filter(
+            username=request.user.username).get()
+
+        # filter matakuliah yang diajar oleh user logged in
+        filter_matakuliah = MataKuliah.objects.filter(pengajar=logged_in_user)
+
+        # filter emodul dari mata kuliah yang diajar oleh user logged in
+        filter_emodul = EModul.objects.filter(
+            mata_kuliah__in=filter_matakuliah)
+
+        # filter semua emoduldetail dari emodul mata kuliah yang diajar oleh user logged in
+        emoduldetail_terfilter = EModulDetail.objects.filter(
+            emodul__in=filter_emodul)
+
+        return emoduldetail_terfilter
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+
+        # custom entri pada dropdown pilihan emodul
+        # hanya menampilkan emodul dari mata kuliah yang diajar oleh user yang logged in
+        if db_field.name == "emodul":
+
+            # filter jika user logged in bukan superuser
+            if not request.user.is_superuser:
+                logged_in_user = CustomUser.objects.filter(
+                    username=request.user.username).get()
+
+                # filter matakuliah yang diajar oleh user logged in
+                filter_matakuliah = MataKuliah.objects.filter(
+                    pengajar=logged_in_user)
+
+                # filter emodul dari mata kuliah yang diajar oleh user logged in
+                kwargs["queryset"] = EModul.objects.filter(
+                    mata_kuliah__in=filter_matakuliah)
+
+            return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 @admin.register(EModulAnnotation)
 class EModulAnnotationAdmin(admin.ModelAdmin):
