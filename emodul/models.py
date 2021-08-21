@@ -31,7 +31,8 @@ class EModulDetail(models.Model):
     judul = models.CharField(_("Judul dokumen"), max_length=50)
     jumlah_halaman = models.SmallIntegerField(
         _("Jumlah halaman"), null=True, blank=True)
-    file = models.FileField(_("File"), upload_to=None, max_length=100)
+    file = models.FileField(
+        _("File"), upload_to="emodul_detail/%Y/%m/%d/", max_length=100)
 
     class Meta:
         verbose_name = 'eModul detail'
