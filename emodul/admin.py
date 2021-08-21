@@ -11,15 +11,36 @@ class EModulAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(admin.ModelAdmin, self).get_queryset(request)
 
-        if request.user.is_superuser:
-            return qs
+        if request.user.is_superuser:  # Jika user adalah superuser
+            return qs                 # tampilkan semua emodul
 
+        # Jika buka superuser, dapatkan objek user yang logged in (asumsinya adalah dosen)
         logged_in_user = CustomUser.objects.filter(
             username=request.user.username).get()
+
+        # filter matakuliah yang diajar oleh user logged in
         filter_matakuliah = MataKuliah.objects.filter(pengajar=logged_in_user)
+
+        # filter semua emodul dari mata kuliah yang diajar oleh user logged in
         emodul_terfilter = EModul.objects.filter(
             mata_kuliah__in=filter_matakuliah)
+
         return emodul_terfilter
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+
+        # custom entri pada dropdown pilihan matakuliah
+        # hanya menampilkan matakuliah yang diajar oleh user yang logged in
+        if db_field.name == "mata_kuliah":
+
+            # filter jika user logged in bukan superuser
+            if not request.user.is_superuser:
+                logged_in_user = CustomUser.objects.filter(
+                    username=request.user.username).get()
+                kwargs["queryset"] = MataKuliah.objects.filter(
+                    pengajar=logged_in_user)
+
+            return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(EModulDetail)
