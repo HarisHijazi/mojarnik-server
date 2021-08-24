@@ -52,6 +52,8 @@ class ProfilMahasiswa(models.Model):
         "Program studi"), on_delete=models.CASCADE, null=True, blank=True)
     semester = models.CharField(
         'Semester', choices=settings.SEMESTER, max_length=5, null=True, blank=True)
+    nim = models.CharField(
+        'NIM', max_length=15, null=True, blank=True)
     kelas = models.CharField(
         'Kelas', max_length=5, null=True, blank=True)
     no_absen = models.PositiveSmallIntegerField(
