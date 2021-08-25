@@ -45,7 +45,7 @@ class CustomUserAdmin(UserAdmin):
         ('Profil Pengguna',
          {
              "fields": (
-                 'role', 'no_hp','profil_user_lengkap',
+                 'role', 'no_hp', 'foto', 'profil_user_lengkap',
              ),
          }),
     )
