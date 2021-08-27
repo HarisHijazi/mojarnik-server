@@ -5,7 +5,7 @@ from accounts.models import CustomUser
 
 @admin.register(EModul)
 class EModulAdmin(admin.ModelAdmin):
-    list_display = ['mata_kuliah', 'judul', 'jumlah_modul','tanggal']
+    list_display = ['mata_kuliah', 'judul', 'cover', 'jumlah_modul','tanggal']
 
     def get_queryset(self, request):
         qs = super(admin.ModelAdmin, self).get_queryset(request)
