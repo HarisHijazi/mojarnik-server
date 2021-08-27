@@ -8,14 +8,14 @@ User = get_user_model()
 
 
 class EModul(models.Model):
-    
+    DEFAULT_COVER_EMODUL = 'images/cover_emodul/default.jpg'
     mata_kuliah = models.ForeignKey("akademik.MataKuliah", verbose_name=_(
         'Mata kuliah'), on_delete=models.CASCADE, related_name='emodul')
     judul = models.CharField(_("Judul modul"), max_length=50)
     jumlah_modul = models.SmallIntegerField(
         _("Jumlah Modul"), null=True, blank=True)
-    # penulis = models.ForeignKey(User, verbose_name=_(
-    #     "Uploader"), on_delete=models.CASCADE, null=True, blank=True, related_name='emodul')
+    cover = models.ImageField(
+        'Cover modul', upload_to="images/cover_emodul/", default=DEFAULT_COVER_EMODUL, null=True, blank=True) 
     tanggal = models.DateField(verbose_name=_("Tanggal Upload"), auto_now=True)
 
     class Meta:
