@@ -1,4 +1,4 @@
-import django_heroku
+# import django_heroku
 import os
 from pathlib import Path
 
@@ -12,7 +12,7 @@ SECRET_KEY = '43)%4yx)aa@a=+_c(fn&kf3g29xax+=+a&key9i=!98zyim=8j'
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "mojarnik.online"]
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'crispy_forms',
     'debug_toolbar',
-    'phonenumber_field',
+    # 'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
     'drf_generators',
@@ -113,7 +113,7 @@ TEMPLATES = [
 # }
 
 
-import dj_database_url
+# import dj_database_url
 
 DATABASES = {
     'default': {
@@ -293,4 +293,4 @@ SEMESTER = (
 
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
