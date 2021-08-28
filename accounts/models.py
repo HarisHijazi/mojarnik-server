@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+# from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import ugettext as _
 from django.db.models.signals import post_save
 from rest_framework.authtoken.models import Token
@@ -28,8 +28,8 @@ class CustomUser(AbstractUser):
         'Role', choices=ROLE_CHOICES, default=MAHASISWA)
     gender = models.PositiveSmallIntegerField(
         'Gender', choices=GENDER, default=PRIA)
-    no_hp = PhoneNumberField(
-        'Nomor HP/WA', help_text='Gunakan format internasional (+628XXXXXX)', default='+62123456789')
+    no_hp = models.CharField(
+        'Nomor HP/WA', help_text='Gunakan format internasional (+628XXXXXX)', default='+62123456789', max_length=16)
     foto = models.ImageField(
         'Foto', upload_to="images/foto_profil/", default=DEFAULT_FOTO_PROFIL, null=True, blank=True)   
     profil_user_lengkap = models.BooleanField(
