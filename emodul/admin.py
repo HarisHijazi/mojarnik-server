@@ -3,9 +3,13 @@ from .models import EModul, EModulComment, EModulDetail, EModulBookmark, EModulA
 from akademik.models import MataKuliah
 from accounts.models import CustomUser
 from allauth.account.models import EmailAddress
+from django.contrib.sites.models import Site
 
 # Sembunyikan allauth account app
 admin.site.unregister(EmailAddress)
+
+# Semubnyikan app situs dari admin
+admin.site.unregister(Site)
 @admin.register(EModul)
 class EModulAdmin(admin.ModelAdmin):
     list_display = ['mata_kuliah', 'judul', 'cover', 'jumlah_modul','tanggal']
