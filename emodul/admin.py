@@ -2,7 +2,10 @@ from django.contrib import admin
 from .models import EModul, EModulComment, EModulDetail, EModulBookmark, EModulAnnotation
 from akademik.models import MataKuliah
 from accounts.models import CustomUser
+from allauth.account.models import EmailAddress
 
+# Sembunyikan allauth account app
+admin.site.unregister(EmailAddress)
 @admin.register(EModul)
 class EModulAdmin(admin.ModelAdmin):
     list_display = ['mata_kuliah', 'judul', 'cover', 'jumlah_modul','tanggal']
